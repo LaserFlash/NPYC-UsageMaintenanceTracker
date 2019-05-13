@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { BoatUsageService } from '../../boat-usage.service'
 import { UsageInfo } from '../../Utils/objects/usageInfo'
 import { KnownBoatsService } from '../../known-boats.service';
+
+import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 
 
 @Component({
@@ -11,9 +13,11 @@ import { KnownBoatsService } from '../../known-boats.service';
   styleUrls: ['./view-usage.component.css']
 })
 export class ViewUsageComponent implements OnInit {
+  @ViewChild(CdkVirtualScrollViewport)
+  viewport: CdkVirtualScrollViewport;
 
   boats;
-  usages;
+  infiniteUsages;
   constructor(
     private usageService: BoatUsageService,
     private BOATS: KnownBoatsService
@@ -24,9 +28,27 @@ export class ViewUsageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.usageService.usageData.subscribe(data => {
-      this.usages = data;
-    });
+    this.infiniteUsages = this.usageService.infiniteUsages;
   }
 
+
+  geNextBatch(e, offset) {
+    offset = offset == undefined ? new Date() : offset.endTime;
+    const end = this.viewport.getRenderedRange().end;
+    const total = this.viewport.getDataLength();
+
+    this.usageService.nextBatch(e, offset, end, total);
+  }
+
+
+  trackByIdx(i) {
+    return i;
+  }
+  
+  getItemHeight(){
+    if (window.innerWidth <= 599) {
+      return 130;
+    }
+    return 80;
+  }
 }
