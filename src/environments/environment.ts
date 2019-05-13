@@ -1,5 +1,6 @@
 export const environment = {
   production: false,
+  version: 'DEV',
   firebase: {
     apiKey: 'AIzaSyCS_XCyI0cldT9OAqW-YFqX58Ev_0bpOIs',
     authDomain: 'npyc-dev.firebaseapp.com',
