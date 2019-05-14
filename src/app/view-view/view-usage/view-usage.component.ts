@@ -19,7 +19,7 @@ export class ViewUsageComponent implements OnInit {
   boats;
   infiniteUsages;
   constructor(
-    private usageService: BoatUsageService,
+    public usageService: BoatUsageService,
     private BOATS: KnownBoatsService
   ) {
     BOATS.boatInformation.subscribe(boats => {
@@ -27,9 +27,7 @@ export class ViewUsageComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-    this.infiniteUsages = this.usageService.infiniteUsages;
-  }
+  ngOnInit() { }
 
 
   geNextBatch(e, offset) {
@@ -44,7 +42,7 @@ export class ViewUsageComponent implements OnInit {
   trackByIdx(i) {
     return i;
   }
-  
+
   getItemHeight(){
     if (window.innerWidth <= 599) {
       return 130;
