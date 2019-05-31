@@ -1,0 +1,31 @@
+.radio-group {
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.radio-button {
+  margin: 5px;
+}
+
+.card_top_pad {
+  margin-top: 10px;
+}
+
+.card_bottom_pad {
+  margin-bottom: 10px;
+}
+
+@media print{
+  .content{
+      min-height:40cm;
+  }
+}
+
+.radio-group {
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.radio-button {
+  margin: 5px;
+}
