@@ -13,9 +13,7 @@ export class UsageCardComponent implements OnInit {
 
   constructor(private BOATS: KnownBoatsService) { }
 
-  ngOnInit() {
-    console.log("card init")
-  }
+  ngOnInit() { }
 
   getBoatName(v) {
     return this.BOATS.getBoatName(v);
