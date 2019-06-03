@@ -32,12 +32,10 @@ export class ReportUsageComponent {
   windSpeed = WindTypes;
   windDirection = WindDirection;
   waterState = WaterState;
-  boatTypes = [{ name: 'RiB', checked: true }, { name: '420', checked: false }];
 
   public usageForm: FormGroup;
 
   formErrors = {
-    'boatType': '',
     'boatID': '',
     'startTime': '',
     'endTime': '',
@@ -49,9 +47,6 @@ export class ReportUsageComponent {
   };
 
   validationMessages = {
-    'boatType': {
-      'required': 'We need to know the type of boat'
-    },
     'boatID': {
       'required': 'You must select a boat.'
     },
@@ -99,7 +94,6 @@ export class ReportUsageComponent {
     this.usageForm = this.fb.group({
       formArray: this.fb.array([
         this.fb.group({
-          boatType: ['', Validators.required],
           boatID: ['', Validators.required],
         }),
         this.fb.group({
@@ -240,7 +234,6 @@ export class ReportUsageComponent {
   * A boat is relevant if it belongs to the previously selected type
   **/
   relevantBoatsFromType(boat: BoatID): boolean {
-    return boat.type1 && this.usageForm.get('formArray').get([0]).value.boatType === 'RiB' ||
-      !boat.type1 && this.usageForm.get('formArray').get([0]).value.boatType === '420';
+    return !boat.type1;
   }
 }
